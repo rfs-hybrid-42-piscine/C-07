@@ -27,7 +27,6 @@ Previously, all arrays and strings were allocated on the Stack, meaning their si
 *The following section explains the core concepts required to solve each exercise. It focuses on the fundamental logic of C programming, emphasizing manual memory manipulation and edge-case management.*
 
 ### 🔹 Memory Allocation Basics
-
 | Exercise | Concept & Logic |
 | :--- | :--- |
 | **[`ex00: ft_strdup`](ex00)** | **String Duplication:** Reproducing the standard `strdup` function using `malloc`. <br><br>**Logic:** We first find the length of the source string `src`. We then use `malloc` to allocate `length + 1` bytes of memory (the `+ 1` is strictly for the null-terminator `\0`). After verifying the allocation didn't fail (return `NULL`), we copy the characters from `src` into our newly allocated memory block and return the pointer. |
@@ -35,7 +34,6 @@ Previously, all arrays and strings were allocated on the Stack, meaning their si
 | **[`ex02: ft_ultimate_range`](ex02)** | **Double Pointers:** Allocating and assigning a range of numbers via a pointer to a pointer. <br><br>**Logic:** Similar to `ex01`, but instead of simply returning the array, we assign the allocated array directly to `*range`. If `min >= max`, we set `*range = NULL` and return `0`. On an allocation error, we return `-1`. Otherwise, we populate the array and return the total size (`max - min`). |
 
 ### 🔢 Advanced String Manipulation
-
 | Exercise | Concept & Logic |
 | :--- | :--- |
 | **[`ex03: ft_strjoin`](ex03)** | **Concatenation:** Joining an array of strings together, divided by a separator string. <br><br>**Logic:** If `size` is 0, we must `malloc` and return an empty string (`\0`). Otherwise, we iterate through all strings in the `strs` array to calculate their total combined length, plus the length of the `sep` string multiplied by `size - 1`. We allocate this exact amount of memory (`+ 1` for the null terminator), copy each string in order, and interleave the separator. |
