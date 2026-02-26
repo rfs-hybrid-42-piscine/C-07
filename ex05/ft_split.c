@@ -6,7 +6,7 @@
 /*   By: maaugust <maaugust@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/25 14:40:00 by maaugust          #+#    #+#             */
-/*   Updated: 2026/02/25 22:58:18 by maaugust         ###   ########.fr       */
+/*   Updated: 2026/02/26 01:51:14 by maaugust         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,23 +58,23 @@ static bool	found_char(char c, char *charset)
  */
 static size_t	count_words(char *str, char *charset)
 {
-	size_t	count;
+	size_t	word_count;
 	bool	in_word;
 
-	count = 0;
+	word_count = 0;
 	in_word = false;
 	while (*str)
 	{
 		if (!found_char(*str, charset) && !in_word)
 		{
 			in_word = true;
-			count++;
+			word_count++;
 		}
 		else if (found_char(*str, charset))
 			in_word = false;
 		str++;
 	}
-	return (count);
+	return (word_count);
 }
 
 /**
@@ -123,23 +123,23 @@ static char	*get_next_word(char **str, char *charset)
 char	**ft_split(char *str, char *charset)
 {
 	char	**split;
-	size_t	n_words;
+	size_t	word_count;
 	size_t	i;
 
 	if (!str || !charset)
 		return (NULL);
-	n_words = count_words(str, charset);
-	split = malloc(sizeof(char *) * (n_words + 1));
+	word_count = count_words(str, charset);
+	split = malloc(sizeof(char *) * (word_count + 1));
 	if (!split)
 		return (NULL);
 	i = 0;
-	while (i < n_words)
+	while (i < word_count)
 	{
 		split[i] = get_next_word(&str, charset);
 		if (!split[i])
 			return (free_split(split, i));
 		i++;
 	}
-	split[n_words] = NULL;
+	split[word_count] = NULL;
 	return (split);
 }
